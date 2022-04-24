@@ -25,7 +25,7 @@ class TasksController extends Controller
                 'tasks' => $tasks,
                 ]);
         }else{
-            return view('tasks.index');
+            return redirect('/');
         }
     }
 
@@ -36,12 +36,19 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $task = new Task;
+        if(\Auth::check()){
+            //タスク一覧の取得
+            $task = new Task;
         
         //メッセージ作成ビューの表示
         return view('tasks.create',[
             'task' => $task,
             ]);
+            
+        }else{
+            return redirect('/');
+        }
+        
         
     }
 
@@ -94,7 +101,7 @@ class TasksController extends Controller
             'task' => $task,
             ]);
         }else{
-            return back();
+            return redirect('/');
         }
         // メッセージ詳細ビューでそれを表示
         
@@ -117,7 +124,7 @@ class TasksController extends Controller
             'task' => $task,
             ]);
         }else{
-            return back();
+            return redirect('/');
         }
         
         
